@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/arpitjaswal/upskill/issues"
   },
-  "homepage": "https://github.com/arpitjaswal/upskill#readme"
+  "homepage": "https://github.com/arpitjaswal/upskill#readme",
+  "dependencies": {
+    "mysql2": "^3.15.3"
+  }
 }
