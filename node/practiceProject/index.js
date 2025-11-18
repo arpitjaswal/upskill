@@ -1,8 +1,8 @@
 import express from 'express';
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 
 const app = express();
-
+app.use(express.json())
 
 
 const pool = mysql.createPool({
@@ -15,23 +15,48 @@ const pool = mysql.createPool({
 })
 
 
+function rateLimiter(){
+    let hits=0;
+
+    return function(req,res,next){
+        ++hits;
+        if(hits>5){
+             return res.status(429).json({status:"failure",message:"too many hits."})
+        }
+        next();
+    }
+}
 
 
 
+const PORT=3001;
 
-const PORT=3000;
+
+
+//async handler
+const asyncHandler = fn=>(req,res,next)=>{
+    Promise
+        .resolve(fn(req,res,next))
+        .catch(next)
+}
+
 
 //get users with async function
 
-app.get("/whereTheUsersAt",async (req,res)=>{
-    
+app.get("/whereTheUsersAt",rateLimiter(),asyncHandler(async (req,res)=>{
+        const query = "select * from practice.users;"
+        const [users,fields] = await pool.execute(query);
+        return res.status(200).json({status:"success",data:users});
+}))
+//global error handler
+app.use((err,req,res,next)=>{
+    return res.status(500).json({status:"failed",error:err.message});
+})
 
-    try {
-        const users = await pool.execute(query);
-        console.log(users)
-    } catch (error) {
-        console.log("not able to fulfil ur request, got this error "+error);
-    }
+
+//register
+app.post('/register',(req,res)=>{
+
 })
 
 
