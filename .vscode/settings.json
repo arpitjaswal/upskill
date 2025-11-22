@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "stack": "cpp",
+        "unordered_map": "cpp"
+    }
+}
