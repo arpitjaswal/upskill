@@ -1,0 +1,34 @@
+Given occupancy = [40, 50, 100, 45, 48]
+
+Find all indices where occupancy is more than 2 × the average occupancy.
+
+
+
+SET result=[]
+SET sum=0
+SET avgOccupency=0
+FOR eachocc in occupancy:
+    sum+=eachocc
+
+avgOccupency=sum/occupancy.size
+
+FOT each occupancy in occupancy:
+    IF each occupancy>2*avgOccupency:
+        add index to result
+
+RETURN result;
+
+
+
+SET result=[]
+SET total=0;
+
+FOR eachocc in occupancy:
+    total=total+eachocc
+
+SET avgOccupency = total/LENGTH(occupancy)
+
+FOR index FROM 0 to LENGTH(occupancy)-1:
+    IF occupancy[index]>avgOccupency:
+        ADD index to result
+RETURN result

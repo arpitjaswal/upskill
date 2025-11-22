@@ -1,0 +1,7 @@
+Given arr = [10, 20, 30, 40, 50]
+Window size = 3
+
+Return the 3-day moving averages.
+
+
+

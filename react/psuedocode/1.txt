@@ -1,0 +1,11 @@
+// prices = [100, 120, 150, 80]
+// multiplier = 1.1
+// cap = 180
+
+SET result=[]
+FOR eachitem in prices:
+    if eachitem*multiplier>180:
+        result.push(cap)
+    else
+        result.push(eachitem*multiplier)
+RETURN result
