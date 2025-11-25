@@ -39,21 +39,50 @@
 #include<utility>
 using namespace std;
 
-vector<int> giveArray(vector<int>& v){
+// vector<int> giveArray(vector<int>& v){
     
+//     stack<int>stk;
+//     vector<int>answer(v.size(),0);
+//     for(int i=v.size()-1;i>=0;i--){
+        
+//         while(!stk.empty() && v[i]>=v[stk.top()]){
+//             stk.pop();
+//         }
+//         //[1,1,4,2,1,1,0,0]
+//         if(stk.empty())answer[i]=0;
+//         else{
+//             answer[i]=stk.top()-i; 
+//         }
+
+//         stk.push(i);
+//     }
+//     return answer;
+// }
+
+// vector<int> giveArray(vector<int>& v){
+//     vector<int>answer;
+//     for(int i=0;i<v.size();i++){
+//         int maxTemp=0;
+//         for(int j=i+1;j<v.size();j++){
+//             if(v[i]<v[j]){
+//                 maxTemp=j-i;
+//                 break;
+//             }
+//         }
+//         answer.push_back(maxTemp);
+//     }
+//     return answer;
+// }
+
+vector<int>giveArray(vector<int>& v){
     stack<int>stk;
     vector<int>answer(v.size(),0);
-    for(int i=v.size()-1;i>=0;i--){
-        
-        while(!stk.empty() && v[i]>=v[stk.top()]){
+    for(int i=0;i<v.size();i++){
+        while(!stk.empty() && v[i]>v[stk.top()]){
+            int idx=stk.top();
             stk.pop();
+            answer[idx]=i-idx;
         }
-        //[1,1,4,2,1,1,0,0]
-        if(stk.empty())answer[i]=0;
-        else{
-            answer[i]=stk.top()-i; 
-        }
-
         stk.push(i);
     }
     return answer;
