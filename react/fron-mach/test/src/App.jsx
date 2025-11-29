@@ -1,15 +1,31 @@
 import {React,useState} from 'react';
-
+import { Routes,Route,Link,useNavigate } from 'react-router-dom';
+import Users from "./Users"
+import User from "./UserDetails"
+import About from "./About"
+import Home from "./HomePage"
 
 function App(){
-    const [count,setCount] = useState(0)
-
+    const navigate = useNavigate();
+    const goToApp = ()=>{
+                navigate("/home")
+            }
     return (
         <>
-        <h1>You clicked {count} times</h1>
-        <button onClick={()=>{
-            setCount(count+1)
-        }}>click me</button>
+        
+ <button onClick={goToApp}>GO TO  APP</button>
+
+      <Link to="/home">Home</Link> |{" "}
+      <Link to="/about">About</Link> |{" "}
+      <Link to="/users">Users</Link>
+        <Routes>
+            <Route path='/login' element={<Home/>}/>
+            <Route path='/home' element={<Home/>}/>
+            <Route path='/users' element={<Users/>}/>
+            <Route path='/user' element={<User/>}/>
+             <Route path='/user/:id' element={<User/>}/>
+            <Route path='/about' element={<About/>}/>
+        </Routes>
         </>
     )
 }
