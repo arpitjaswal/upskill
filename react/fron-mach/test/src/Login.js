@@ -1,4 +1,4 @@
-import React,{useState} from "react-router-dom";
+import React,{useState} from "react";
 
 
 const Login = ()=>{
@@ -6,7 +6,7 @@ const Login = ()=>{
 
     return(
         <>
-            login page
+            <p>login page</p>
         </>
     )
 }

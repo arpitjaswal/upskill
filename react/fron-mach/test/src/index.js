@@ -12,6 +12,13 @@ import ParentComponent from './ParentComponent'
 import ContextPractice from './ContextPractice';
 import useFetch from './useFetch';
 import ParentMemo from './ParentMemo';
+import Debounce from './Debounce';
+import ToDoApp from './ToDoApp';
+import UserListNew from './UserListNew';
+import CounterWithHistory from './CounterWithHistory';
+import SearchAndPagination from './SearchAndPagination';
+import Promises from './Promises';
+import FormValidation from './FormValidation';
 
 function Main(){
     const data =  useFetch("https://jsonplaceholder.typicode.com/posts");
@@ -20,6 +27,22 @@ function Main(){
     return(
 
         <>
+        <p>--------------------------------------</p>
+        <FormValidation/>
+        <p>---------------------------------------</p>
+        <Promises/>
+        <p>----------------------------------------</p>
+         <SearchAndPagination/>
+        <p>-----------------------------------------</p>
+        <CounterWithHistory/>
+        <p>----------------------------------------</p>
+            <UserListNew/>
+        <p>-----------------------------------------</p>
+            <ToDoApp/>
+        <p>------------------------------------------</p>
+            <Debounce/>
+
+        <p>----------------------------------</p>
            <BrowserRouter>
            <App/>
            </BrowserRouter>
