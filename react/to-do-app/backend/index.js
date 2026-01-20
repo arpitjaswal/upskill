@@ -17,7 +17,9 @@ app.get("/getToDos",async (req,res)=>{
 //create a new todo
 app.post("/createToDo", async (req,res)=>{
     const payLoadFromFrontend = req.body;
+    console.log(payLoadFromFrontend)
     const safePayLoad = createToDo.safeParse(payLoadFromFrontend)
+    console.log(safePayLoad)
     if(!safePayLoad.success){
         return res.status(411).json({
             msg:"body is not correct."
@@ -25,8 +27,8 @@ app.post("/createToDo", async (req,res)=>{
     }
     
     await toDoModel.create({
-        title: safePayLoad.title,
-        description: safePayLoad.description,
+        title: safePayLoad.data.title,
+        description: safePayLoad.data.description,
         completed: false
     })
 
@@ -42,20 +44,10 @@ app.delete("deleteToDo",(req,res)=>{
 })
 
 //update todo
-app.put("markAsDoneToDo",async (req,res)=>{
-    const reqBody = req.body;
-    const safePayLoad = updateToDo.safeParse(reqBody)
-    if(!safePayLoad.success){
-        return res.status(411).json({
-            msg:"the body is not correct"
-        })
-    }
-    
-    await toDoModel.update({
-        _id:req.body.id
+app.put("/markAsDoneToDo",async (req,res)=>{
+    await toDoModel.findOneAndUpdate({
+        _id:req.body._id
     },{
-        title:safePayLoad.title,
-        description:safePayLoad.description,
         completed:true
     })
     return res.status(200).json({
