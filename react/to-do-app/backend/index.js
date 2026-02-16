@@ -3,9 +3,12 @@
 import express from "express"
 import {createToDo,updateToDo} from "./types.js"
 import toDoModel from "./db.js";
+import cors from "cors"
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+}));
 
 //get the todos
 app.get("/getToDos",async (req,res)=>{
@@ -16,9 +19,12 @@ app.get("/getToDos",async (req,res)=>{
 
 //create a new todo
 app.post("/createToDo", async (req,res)=>{
-    const payLoadFromFrontend = req.body;
-    console.log(payLoadFromFrontend)
-    const safePayLoad = createToDo.safeParse(payLoadFromFrontend)
+    console.log(req.body)
+    const title = req.body.title;
+    const description = req.body.description;
+    const completed = req.body.completed;
+    console.log(req.body)
+    const safePayLoad = createToDo.safeParse({title,description,completed})
     console.log(safePayLoad)
     if(!safePayLoad.success){
         return res.status(411).json({
